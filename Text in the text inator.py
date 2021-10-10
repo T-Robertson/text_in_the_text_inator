@@ -17,6 +17,7 @@ class Word_crypto():
                 self.recover_text()
             if x == 'insert key':
                 self.key = input('Please input key: ')
+                self.recover_text()
             if x == 'write':
                 self.write_message()
             elif x != 'read' and x != 'write' and x != 'insert key' and x != 'recover':
@@ -36,19 +37,14 @@ class Word_crypto():
         write_text = ""
         message_text = ""
         word = ""
-        numbers = ""
         print("Discovering message")
         if self.key == '':
-            while len(self.word_list) > 0:
+            for words in self.word_list:
                 x = random.randrange(0, len(self.word_list))
                 word = self.word_list[x]
                 write_text = ' '.join((write_text,word))
-                numbers = ' '.join((numbers,format(x)))
-                self.word_list.remove(word)
             with open('message.txt', 'w') as file:
                 file.write(write_text)
-                file.write('\n')
-                file.write(numbers)
         else:
             key = list(self.key.split(' '))
             print("Key added")  
@@ -66,8 +62,7 @@ class Word_crypto():
             for x in message:
                 number = self.word_list.index(x)
                 write_key = ' '.join((write_key,format(number)))
-            with open('message.txt', 'w') as file:
-                file.write(write_key)
+            print(write_key)
 
             
 def main():
